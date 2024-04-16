@@ -12,7 +12,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoryAsync, editCategoryAsync, getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import DeleteOption from "./deleteOption";
-import EditForm from "./EditForm";
+import EditForm from "./editForm";
 
 const columns = [
   { id: "srNo", label: "Sr No", minWidth: 80 },
