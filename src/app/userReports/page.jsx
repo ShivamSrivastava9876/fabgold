@@ -1,7 +1,7 @@
 "use client"
 
 import Layout from "@/components/layout";
-import UserReportTable from "@/components/UserReportTable";
+import UserReportTable from "@/components/userReportTable";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
