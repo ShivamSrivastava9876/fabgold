@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUserAsync, selectUserData, userActiveAsync, userDetailsAsync } from "@/redux/slice/user/userSlice";
-import DeleteOption from "./DeleteOption";
+import DeleteOption from "./deleteOption";
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { FaCheckSquare, FaSquare } from 'react-icons/fa';
 
