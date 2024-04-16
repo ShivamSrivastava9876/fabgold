@@ -338,7 +338,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                         </div>
                         <div className="mb-4 ">
                             <input
-                                type="text"
+                                type="number"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                 defaultValue={row.price}
                                 value={price}
@@ -349,7 +349,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                         </div>
                         <div className="mb-4 ">
                             <input
-                                type="text"
+                                type="number"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                 defaultValue={row.quantity}
                                 value={quantity}

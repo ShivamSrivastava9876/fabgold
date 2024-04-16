@@ -643,7 +643,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${price === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
@@ -652,7 +652,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${quantity === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
