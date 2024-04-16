@@ -12,7 +12,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductAsync, getProductAsync, getProductList, updateProductAsync } from "@/redux/slice/product/productSlice";
 import EditFormProduct from "@/components/EditFormProduct";
-import DeleteOption from "./DeleteOption";
+import DeleteOption from "./deleteOption";
 
 const columns = [
   { id: "HuId", label: "HU ID", minWidth: 50 },

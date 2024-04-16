@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoryAsync, editCategoryAsync, getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
-import DeleteOption from "./DeleteOption";
+import DeleteOption from "./deleteOption";
 import EditForm from "./EditForm";
 
 const columns = [
