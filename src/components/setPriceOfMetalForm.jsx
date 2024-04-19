@@ -5,7 +5,7 @@ import { FiImage } from 'react-icons/fi';
 import { createGoldRateAsync, createSilverRateAsync, getGoldData, getGoldRateAsync, getSilverData, getSilverRateAsync } from "@/redux/slice/metalRate/metalRateSlice";
 import { Result } from "postcss";
 
-const setPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen }) => {
+const SetPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen }) => {
     const dispatch = useDispatch();
 
     const [goldPrice, setGoldPrice] = useState("");
@@ -186,4 +186,4 @@ const setPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen
     );
 };
 
-export default setPriceOfMetalForm;
+export default SetPriceOfMetalForm;
