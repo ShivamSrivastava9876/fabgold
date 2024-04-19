@@ -13,7 +13,7 @@ const OrderByUserReport = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push('/login'); // Redirect to login page if token is not found
+      router.push('/admin/login'); // Redirect to login page if token is not found
     }
   }, [router]); 
 

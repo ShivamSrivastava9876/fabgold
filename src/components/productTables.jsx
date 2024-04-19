@@ -21,12 +21,17 @@ const columns = [
   { id: "category", label: "Category", minWidth: 100 },
   { id: "productType", label: "Product type", minWidth: 100 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "grossWeight", label: "Weight (gm)", minWidth: 80 },
+  { id: "stoneWeight", label: "Stone weight (gm)", minWidth: 50 },
+  { id: "metalWeight", label: "Metal weight (gm)", minWidth: 50 },
+  { id: "grossWeight", label: "Total weight (gm)", minWidth: 80 },
   { id: "size", label: "Size (cm)", minWidth: 80 },
   { id: "length", label: "Length (cm)", minWidth: 80 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 50 },
-  { id: "price", label: "Price", minWidth: 100 },
-  { id: "actions", label: "", minWidth: 100 },
+  { id: "puritySpc", label: "Purity spec", minWidth: 50 },
+  { id: "metalPrice", label: "Metal price", minWidth: 50 },
+  { id: "makingCharges", label: "Making charges", minWidth: 50 },
+  { id: "otherCharges", label: "Other charges", minWidth: 50 },
+  { id: "price", label: "Total price", minWidth: 100 },
+  { id: "actions", label: "", minWidth: 100 }
 ];
 
 const createData = (
@@ -34,7 +39,7 @@ const createData = (
   productId,
   product,
   quantity,
-  // stoneWeight,
+  stoneWeight,
   grossWeight,
   puritySpc,
   price,
@@ -46,13 +51,18 @@ const createData = (
   productType,
   productImage,
   size,
-  length
+  length,
+  metalWeight,
+  metalPrice,
+  otherCharges,
+  makingCharges
 ) => {
   return {
     HuId,
     productId,
     product,
     quantity,
+    stoneWeight,
     grossWeight,
     puritySpc,
     price,
@@ -64,7 +74,11 @@ const createData = (
     productType,
     productImage,
     size,
-    length
+    length,
+    metalWeight,
+    metalPrice,
+    otherCharges,
+    makingCharges
   };
 };
 
@@ -76,17 +90,21 @@ export default function ProductTables() {
   const [productName, setProductName] = React.useState("");
   const [model, setModel] = React.useState("");
   const [subModel, setSubModel] = React.useState("");
-  const [stoneWeight, setStoneWeight] = React.useState([]);
+  const [stoneWeight, setStoneWeight] = React.useState("");
   const [image, setImage] = React.useState(null);
-  const [grossWeight, setGrossWeight] = React.useState([]);
+  const [grossWeight, setGrossWeight] = React.useState("");
   const [puritySpc, setPuritySpc] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [productType, setProductType] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [size, setSize] = React.useState([]);
-  const [length, setLength] = React.useState([]);
+  const [size, setSize] = React.useState("");
+  const [length, setLength] = React.useState("");
+  const [metalWeight, setMetalWeight] = React.useState("");
+  const [metalPrice, setMetalPrice] = React.useState("");
+  const [makingCharges, setMakingCharges] = React.useState("");
+  const [otherCharges, setOtherCharges] = React.useState("");
 
   const [files, setFiles] = React.useState("");
 
@@ -102,27 +120,33 @@ export default function ProductTables() {
   const [rows, setRows] = React.useState([]);
   const productList = useSelector(getProductList);
 
-  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowSize, rowLength, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
+  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowMetalWeight, rowStoneWeight, rowGrossWeight, rowSize, rowLength, rowPuritySpc, rowMetalPrice, rowMakingCharges, rowOtherCharges, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
     e.preventDefault();
+
     const updatedImage = image !== null ? image : rowImage;
     const updatedHuId = huId !== "" ? huId : rowHuId;
     const updatedProductId = productId !== "" ? productId : rowProductId;
     const updatedModel = model !== "" ? model : rowModel;
     const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
     const updatedProduct = productName !== "" ? productName : rowProduct;
-    // const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
-    const updatedGrossWeight = grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
-    const updatedSize = size.length !== 0 ? size : rowSize;
-    const updatedLength = length.length !== 0 ? length : rowLength;
+    const updatedMetalWeight = metalWeight !== "" ? metalWeight : rowMetalWeight;
+    const updatedStoneWeight = stoneWeight.length !== "" ? stoneWeight : rowStoneWeight;
+    const updatedGrossWeight = grossWeight.length !== "" ? grossWeight : rowGrossWeight;
+    const updatedSize = size.length !== "" ? size : rowSize;
+    const updatedLength = length.length !== "" ? length : rowLength;
     const updatedPuritySpc = puritySpc !== "" ? puritySpc : rowPuritySpc;
+    const updatedMetalPrice = metalPrice !== "" ? metalPrice : rowMetalPrice;
+    const updatedMakingCharges = makingCharges !== "" ? makingCharges : rowMakingCharges;
+    const updatedOtherCharges = otherCharges !== "" ? otherCharges : rowOtherCharges;
     const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
-    const updatedPrice = price !== "" ? price : rowPrice;
     const updatedDescription = description !== "" ? description : rowDescription;
     const updatedCategory = category !== "" ? category : rowCategory;
     const updatedProductType = productType !== "" ? productType : rowProductType;
 
-    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, hu_id: updatedHuId, product_id: updatedProductId, model: updatedModel, sub_model: updatedSubModel, product_name: updatedProduct, metal_wt: updatedMetalWeight, stone_wt: updatedStoneWeight, gross_wt: updatedGrossWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, metal_price: updatedMetalPrice, making_charges: updatedMakingCharges, other_charges: updatedOtherCharges, quantity: updatedQuantity, description: updatedDescription, image: updatedImage, is_available: true })).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
+        console.log(updatedMetalWeight, "hehe2")
+
         dispatch(getProductAsync());
         setHuId("");
         setProductId("");
@@ -139,6 +163,10 @@ export default function ProductTables() {
         setProductType("");
         setDescription("");
         setEditedRow(null);
+        setMetalWeight("");
+        setMetalPrice("");
+        setMakingCharges("");
+        setOtherCharges("");
 
         setUpdateSuccess(true);
         setTimeout(() => {
@@ -175,7 +203,7 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowImage, rowId, rowCategory, rowProductType, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
+  const handleEdit = (rowImage, rowId, rowCategory, rowProductType, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowQuantity, rowDescription, rowSize, rowLength, rowMetalWeight, rowMetalPrice, rowMakingCharges, rowOtherCharges) => {
     setEditedRow(rowId);
     setHuId(rowHuId);
     setProductId(rowProductId);
@@ -185,11 +213,16 @@ export default function ProductTables() {
     setStoneWeight(rowStoneWeight);
     setGrossWeight(rowGrossWeight);
     setPuritySpc(rowPuritySpc);
-    setPrice(rowPrice);
     setQuantity(rowQuantity);
     setDescription(rowDescription);
     setImage(rowImage);
     setFiles(rowImage.length);
+    setSize(rowSize);
+    setLength(rowLength);
+    setMetalWeight(rowMetalWeight);
+    setMetalPrice(rowMetalPrice);
+    setMakingCharges(rowMakingCharges);
+    setOtherCharges(rowOtherCharges);
   }
 
   const handleProductType = () => {
@@ -253,6 +286,7 @@ export default function ProductTables() {
           data.product_id || "",
           data.product_name || "",
           data.quantity || "",
+          data.stone_wt || "",
           data.gross_wt || "",
           data.purity_spec || "",
           data.price || "",
@@ -264,7 +298,11 @@ export default function ProductTables() {
           data.product_type || "",
           data.product_images,
           data.size || [],
-          data.length || []
+          data.length || [],
+          data.metal_wt || "",
+          data.metal_price || "",
+          data.other_charges || "",
+          data.making_charges || ""
         );
         srNo = srNo + 1;
         return newRow;
@@ -342,17 +380,13 @@ export default function ProductTables() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProduct length={length} setLength={setLength} size={size} setSize={setSize} files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormProduct metalWeight={metalWeight} setMetalWeight={setMetalWeight} metalPrice={metalPrice} setMetalPrice={setMetalPrice} makingCharges={makingCharges} setMakingCharges={setMakingCharges} otherCharges={otherCharges} setOtherCharges={setOtherCharges} length={length} setLength={setLength} size={size} setSize={setSize} files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">
-                                    {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
-                                    Edit
-                                  </Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.productType, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
-                                    {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
-                                    Delete
-                                  </Button> */}
+                                    
+                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.productType, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.quantity, row.description, row.size, row.length, row.metalWeight, row.metalPrice, row.makingCharges, row.otherCharges)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    
                                     <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
                                     {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 

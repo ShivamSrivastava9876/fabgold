@@ -1,30 +1,31 @@
 "use client"
 
 import Layout from "@/components/layout";
-import UserReportTable from "@/components/userReportTable";
+import OrderReportTable from "@/components/orderReports";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const UserReports = () => {
+const DailyReports = () => {
   const [addProduct, setAddProduct] = useState(false);
   const router = useRouter(); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push('/login'); // Redirect to login page if token is not found
+      router.push('/admin/login'); // Redirect to login page if token is not found
     }
   }, [router]); 
 
   return (
     <Layout>
       <div className="p-8">
-        <UserReportTable />
+        {/* <OrderButtons /> */}
+        <OrderReportTable  />
       </div>
     </Layout>
   );
 };
 
-export default UserReports;
+export default DailyReports;
 

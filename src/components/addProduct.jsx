@@ -15,9 +15,9 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [productName, setProductName] = useState("");
   const [model, setModel] = useState("");
   const [subModel, setSubModel] = useState("");
-  const [stoneWeight, setStoneWeight] = useState([]);
-  const [image, setImage] = useState("");
-  const [weight, setWeight] = useState([]);
+  const [stoneWeight, setStoneWeight] = useState("");
+  const [image, setImage] = useState(null);
+  const [weight, setWeight] = useState("");
   const [puritySpc, setPuritySpc] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -26,9 +26,13 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [openCategory, setOpenCategory] = useState(false);
   const [openProductType, setOpenProductType] = useState(false);
   const [description, setDescription] = useState("");
-  const [size, setSize] = useState([]);
-  const [length, setLength] = useState([]);
+  const [size, setSize] = useState("");
+  const [length, setLength] = useState("");
   const [files, setFiles] = useState("");
+  const [metalWeight, setMetalWeight] = useState("");
+  const [metalPrice, setMetalPrice] = useState("");
+  const [makingCharges, setMakingCharges] = useState("");
+  const [otherCharges, setOtherCharges] = useState("");
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -58,13 +62,13 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   };
 
   const handleProductSubmit = (e) => {
-    if (image && category !== "" && productType !== "" && huId !== "" && productId !== "" && price !== "" && quantity !== "" && description !== "" && weight.length !== 0) {
+    if (image && category !== "" && productType !== "" && huId !== "" && productId !== "" && productName !== "" && metalWeight !== "" && weight !== "" && puritySpc !== "" && metalPrice !== "" && makingCharges !== "" && otherCharges !== "" && quantity !== "" && description !== "" && weight.length !== 0) {
       e.preventDefault();
 
       //logic for add product of chain
       if (productType.toLowerCase() === 'chain') {
         if (length.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length, metal_weight: metalWeight, metal_price: metalPrice, making_charges: makingCharges, other_charges: otherCharges })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -74,9 +78,9 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductName("");
               setModel("");
               setSubModel("");
-              setStoneWeight([]);
+              setStoneWeight("");
               setImage("");
-              setWeight([]);
+              setWeight("");
               setPuritySpc("");
               setPrice("");
               setQuantity("");
@@ -84,6 +88,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductType("");
               setDescription("");
               setFiles("");
+              setMetalWeight("");
+              setMetalPrice("");
+              setMakingCharges("");
+              setOtherCharges("");
 
               setSuccess(true);
               setTimeout(() => {
@@ -105,7 +113,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       //logic for add product of necklace, ring and bangle
       else if (productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') {
         if (size.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, size: size, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, length })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, size: size, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, length, metal_weight: metalWeight, metal_price: metalPrice, making_charges: makingCharges, other_charges: otherCharges })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -115,9 +123,9 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductName("");
               setModel("");
               setSubModel("");
-              setSize([]);
+              setSize("");
               setImage("");
-              setWeight([]);
+              setWeight("");
               setPuritySpc("");
               setPrice("");
               setQuantity("");
@@ -125,6 +133,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductType("");
               setDescription("");
               setFiles("");
+              setMetalWeight("");
+              setMetalPrice("");
+              setMakingCharges("");
+              setOtherCharges("");
 
               setSuccess(true);
               setTimeout(() => {
@@ -145,7 +157,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       //logic for add product of bracelet
       else if (productType.toLowerCase() === 'bracelet') {
         if (length.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, length: length, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, length: length, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, metal_weight: metalWeight, metal_price: metalPrice, making_charges: makingCharges, other_charges: otherCharges })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -155,9 +167,9 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductName("");
               setModel("");
               setSubModel("");
-              setLength([]);
+              setLength("");
               setImage("");
-              setWeight([]);
+              setWeight("");
               setPuritySpc("");
               setPrice("");
               setQuantity("");
@@ -165,6 +177,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               setProductType("");
               setDescription("");
               setFiles("");
+              setMetalWeight("");
+              setMetalPrice("");
+              setMakingCharges("");
+              setOtherCharges("");
 
               setSuccess(true);
               setTimeout(() => {
@@ -183,7 +199,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       }
 
       else {
-        dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, length })).then((result) => {
+        dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, length, metal_weight: metalWeight, metal_price: metalPrice, making_charges: makingCharges, other_charges: otherCharges })).then((result) => {
           if (createProductAsync.fulfilled.match(result)) {
             dispatch(getProductAsync());
             setCategory("");
@@ -194,7 +210,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
             setModel("");
             setSubModel("");
             setImage("");
-            setWeight([]);
+            setWeight("");
             setPuritySpc("");
             setPrice("");
             setQuantity("");
@@ -202,6 +218,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
             setProductType("");
             setDescription("");
             setFiles("");
+            setMetalWeight("");
+            setMetalPrice("");
+            setMakingCharges("");
+            setOtherCharges("");
 
             setSuccess(true);
             setTimeout(() => {
@@ -250,82 +270,6 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const hideSuccess = () => {
     setSuccess(false);
   }
-
-  //Input box for weight handling
-  const [inputTextWeight, setInputTextWeight] = useState('');
-
-  const addInputWeight = (e) => {
-    e.preventDefault();
-    if (inputTextWeight.trim() !== '') {
-      setWeight([...weight, inputTextWeight]);
-      setInputTextWeight('');
-    }
-  };
-
-  const deleteInputWeight = (e, index) => {
-    e.preventDefault();
-    const updatedList = [...weight];
-    updatedList.splice(index, 1);
-    setWeight(updatedList);
-  };
-  // **
-
-  //Input box stone weight handling
-  const [inputText, setInputText] = useState('');
-
-  const addInput = (e) => {
-    e.preventDefault();
-    if (inputText.trim() !== '') {
-      setStoneWeight([...stoneWeight, inputText]);
-      setInputText('');
-    }
-  };
-
-  const deleteInput = (e, index) => {
-    e.preventDefault();
-    const updatedList = [...stoneWeight];
-    updatedList.splice(index, 1);
-    setStoneWeight(updatedList);
-  };
-  // **
-
-  //Input box size handling
-  const [inputTextSize, setInputTextSize] = useState('');
-
-  const addInputSize = (e) => {
-    e.preventDefault();
-    if (inputTextSize.trim() !== '') {
-      setSize([...size, inputTextSize]);
-      setInputTextSize('');
-    }
-  };
-
-  const deleteInputSize = (e, index) => {
-    e.preventDefault();
-    const updatedList = [...size];
-    updatedList.splice(index, 1);
-    setSize(updatedList);
-  };
-  // **
-
-  //Input box length handling
-  const [inputTextLength, setInputTextLength] = useState('');
-
-  const addInputLength = (e) => {
-    e.preventDefault();
-    if (inputTextLength.trim() !== '') {
-      setLength([...length, inputTextLength]);
-      setInputTextLength('');
-    }
-  };
-
-  const deleteInputLength = (e, index) => {
-    e.preventDefault();
-    const updatedList = [...length];
-    updatedList.splice(index, 1);
-    setLength(updatedList);
-  };
-  // **
 
   return (
     <>
@@ -500,7 +444,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   placeholder="Sub model"
                 />
               </div>}
-              {productType && <div className={`mb-4 md:w-21.375`}>
+              {/* {productType && <div className={`mb-4 md:w-21.375`}>
                 <div className="relative md:w-21.375">
                   <input
                     type="number"
@@ -526,7 +470,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     ))}
                   </div>
                 </div>
-              </div>}
+              </div>} */}
               {/* {productType.toLowerCase() === 'chain' && <div className={`mb-4 md:w-21.375`}>
                 <div className="relative md:w-21.375">
                   <input
@@ -555,7 +499,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </div>
 
               </div>} */}
-              {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 md:w-21.375">
+              {/* {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 md:w-21.375">
                 <div className="relative md:w-21.375">
                   <input
                     type="number"
@@ -581,8 +525,8 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     ))}
                   </div>
                 </div>
-              </div>}
-              {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className="mb-4 md:w-21.375">
+              </div>} */}
+              {/* {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className="mb-4 md:w-21.375">
                 <div className="relative md:w-21.375">
                   <input
                     type="number"
@@ -608,7 +552,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     ))}
                   </div>
                 </div>
-              </div>}
+              </div>} */}
               {productType && <div className={`mb-4 md:w-21.375 ${productName === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
@@ -631,23 +575,92 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </label>
               </div>}
 
-
-              {productType && <div className="mb-4 md:w-21.375">
-                <input
-                  type="text"
-                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                  value={puritySpc}
-                  onChange={(e) => setPuritySpc(e.target.value)}
-                  placeholder="Purity spc"
-                />
-              </div>}
-              {productType && <div className={`mb-4 md:w-21.375 ${price === '' && error ? 'border-2 border-red-500' : ''}`}>
+              {productType && <div className={`mb-4 md:w-21.375 ${metalWeight === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="number"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  placeholder="Price"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={metalWeight}
+                  onChange={(e) => setMetalWeight(e.target.value)}
+                  placeholder="Metal weight"
+                />
+              </div>}
+              {(productType.toLowerCase() === 'necklace') && <div className={`mb-4 md:w-21.375`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={stoneWeight}
+                  onChange={(e) => setStoneWeight(e.target.value)}
+                  placeholder="Stone weight"
+                />
+              </div>}
+              {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className={`mb-4 md:w-21.375 ${size === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={size}
+                  onChange={(e) => setSize(e.target.value)}
+                  placeholder="Size"
+                />
+              </div>}
+              {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className={`mb-4 md:w-21.375 ${length === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={length}
+                  onChange={(e) => setLength(e.target.value)}
+                  placeholder="Length"
+                />
+              </div>}
+              {productType && <div className={`mb-4 md:w-21.375 ${weight === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                  placeholder="Total weight"
+                />
+              </div>}
+
+              {productType && (
+                <div className={`mb-4 md:w-21.375 ${puritySpc === '' && error ? 'border-2 border-red-500' : ''}`}>
+                  <select
+                    className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010] appearance-none"
+                    value={puritySpc}
+                    onChange={(e) => setPuritySpc(e.target.value)}
+                  >
+                    <option value="">Select Purity</option>
+                    <option value="24k">24k</option>
+                    <option value="23k">23k</option>
+                    <option value="22k">22k</option>
+                    <option value="18k">18k</option>
+                  </select>
+                </div>
+              )}
+              {productType && <div className={`mb-4 md:w-21.375 ${metalPrice === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={metalPrice}
+                  onChange={(e) => setMetalPrice(e.target.value)}
+                  placeholder="Metal price"
+                />
+              </div>}
+              {productType && <div className={`mb-4 md:w-21.375 ${makingCharges === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={makingCharges}
+                  onChange={(e) => setMakingCharges(e.target.value)}
+                  placeholder="Making charges"
+                />
+              </div>}
+              {productType && <div className={`mb-4 md:w-21.375 ${otherCharges === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="number"
+                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={otherCharges}
+                  onChange={(e) => setOtherCharges(e.target.value)}
+                  placeholder="Other charges"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${quantity === '' && error ? 'border-2 border-red-500' : ''}`}>

@@ -7,9 +7,9 @@ import { FiImage } from 'react-icons/fi';
 import AddIcon from "../../public/assets/Icons/add.svg";
 import Image from "next/image";
 
-const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
+const EditFormProduct = ({ metalWeight, setMetalWeight, metalPrice, setMetalPrice, makingCharges, setMakingCharges, otherCharges, setOtherCharges, size, setSize, length, setLength, files, setFiles, productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
     const dispatch = useDispatch();
-
+    
     const modalClasses = isOpen ? 'block' : 'hidden';
 
     useEffect(() => {
@@ -32,66 +32,6 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
         setImage(selectedFile);
     }
 
-    //Handling add weight
-    const [inputTextWeight, setInputTextWeight] = useState('');
-    const [weightArray, setWeightArray] = useState(row.grossWeight && typeof row.grossWeight === 'string' ? row.grossWeight.split(',') : []);
-    const addInputWeight = (e) => {
-        e.preventDefault();
-        if (inputTextWeight.trim() !== '') {
-            setWeightArray([...weightArray, inputTextWeight]);
-            setGrossWeight([...weightArray, inputTextWeight]);
-            setInputTextWeight('');
-        }
-    };
-    const deleteInputWeight = (e, index) => {
-        e.preventDefault();
-        const updatedList = [...weightArray];
-        updatedList.splice(index, 1);
-        setWeightArray(updatedList);
-        setGrossWeight(updatedList);
-    };
-    
-    const [inputTextSize, setInputTextSize] = useState('');
-    const [sizeArray, setSizeArray] = useState(row.size && typeof row.size === 'string' ? row.size.split(',') : []);
-    const addInputSize = (e) => {
-        e.preventDefault();
-        if (inputTextSize.trim() !== '') {
-            setSizeArray([...sizeArray, inputTextSize]);
-            setSize([...sizeArray, inputTextSize]);
-            setInputTextSize('');
-        }
-    };
-
-    const deleteInputSize = (e, index) => {
-        e.preventDefault();
-        const updatedList = [...sizeArray];
-        updatedList.splice(index, 1);
-        setSizeArray(updatedList);
-        setSize(updatedList);
-    };
-    // **
-    //Input box length handling
-    const [inputTextLength, setInputTextLength] = useState('');
-    const [lengthArray, setLengthArray] = useState(row.length && typeof row.length === 'string' ? row.length.split(',') : []);
-
-    const addInputLength = (e) => {
-        e.preventDefault();
-        if (inputTextLength.trim() !== '') {
-            setLengthArray([...lengthArray, inputTextLength]);
-            setLength([...lengthArray, inputTextLength]);
-            setInputTextLength('');
-        }
-    };
-
-    const deleteInputLength = (e, index) => {
-        e.preventDefault();
-        const updatedList = [...lengthArray];
-        updatedList.splice(index, 1);
-        setLengthArray(updatedList);
-        setLength(updatedList);
-    };
-    // **
-
     return (
         <div>
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
@@ -100,7 +40,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.size, row.length, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
+                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.metalWeight, row.stoneWeight, row.grossWeight, row.size, row.length, row.puritySpc, row.metalPrice, row.makingCharges, row.otherCharges, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll no-scrollbar h-full w-auto bg-white border border-blue-500"
                 >
@@ -221,85 +161,6 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                 placeholder="Sub model"
                             />
                         </div>
-                        
-                        <div className="mb-4 ">
-
-                            <input
-                                type="text"
-                                value={inputTextWeight}
-                                onChange={(e) => setInputTextWeight(e.target.value)}
-                                placeholder="Weight"
-                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
-                            />
-                            <button onClick={(e) => addInputWeight(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
-                                <Image src={AddIcon} alt="dashboard-icon" />
-                            </button>
-                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
-                                {weightArray?.map((text, index) => (
-                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
-                                        {text}
-                                        <button
-                                            className="ml-2 text-red-500"
-                                            onClick={(e) => deleteInputWeight(e, index)}
-                                        >
-                                            &#10006;
-                                        </button>
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
-                            <input
-                                type="text"
-                                value={inputTextSize}
-                                onChange={(e) => setInputTextSize(e.target.value)}
-                                placeholder="Size"
-                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
-                            />
-                            <button onClick={(e) => addInputSize(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
-                                <Image src={AddIcon} alt="dashboard-icon" />
-                            </button>
-                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
-                                {sizeArray?.map((text, index) => (
-                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
-                                        {text}
-                                        <button
-                                            className="ml-2 text-red-500"
-                                            onClick={(e) => deleteInputSize(e, index)}
-                                        >
-                                            &#10006;
-                                        </button>
-                                    </span>
-                                ))}
-                            </div>
-                        </div>}
-
-                        {(row.productType.toLowerCase() === 'bracelet' || row.productType.toLowerCase() === 'chain') && <div className="mb-4 ">
-                            <input
-                                type="text"
-                                value={inputTextLength}
-                                onChange={(e) => setInputTextLength(e.target.value)}
-                                placeholder="Length"
-                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
-                            />
-                            <button onClick={(e) => addInputLength(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
-                                <Image src={AddIcon} alt="dashboard-icon" />
-                            </button>
-                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
-                                {lengthArray?.map((text, index) => (
-                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
-                                        {text}
-                                        <button
-                                            className="ml-2 text-red-500"
-                                            onClick={(e) => deleteInputLength(e, index)}
-                                        >
-                                            &#10006;
-                                        </button>
-                                    </span>
-                                ))}
-                            </div>
-                        </div>}
 
                         <div className="mb-4 ">
                             <input
@@ -311,7 +172,62 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                 placeholder="Product name"
                             />
                         </div>
+
+                        <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.metalWeight}
+                                value={metalWeight}
+                                onChange={(e) => setMetalWeight(e.target.value)}
+                                placeholder="Metal weight"
+                            />
+                        </div>
+                        {(row.productType.toLowerCase() === 'necklace') && <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.stoneWeight}
+                                value={stoneWeight}
+                                onChange={(e) => setStoneWeight(e.target.value)}
+                                placeholder="Stone weight"
+                            />
+                        </div>}
+                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.size}
+                                value={size}
+                                onChange={(e) => setSize(e.target.value)}
+                                placeholder="Size"
+                            />
+                        </div>}
+                        {(row.productType.toLowerCase() === 'bracelet' || row.productType.toLowerCase() === 'chain') && <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.length}
+                                value={length}
+                                onChange={(e) => setLength(e.target.value)}
+                                placeholder="Length"
+                            />
+                        </div>}
+
                         
+                        <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.grossWeight}
+                                value={grossWeight}
+                                onChange={(e) => setGrossWeight(e.target.value)}
+                                placeholder="Total weight"
+                            />
+                        </div>
+
+                        
+
                         <div className="mb-4 flex justify-center items-center">
                             <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
                                 <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Click here to update images'}
@@ -326,25 +242,51 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                         </div>
 
 
-                        <div className="mb-4 ">
-                            <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+
+
+                        <div className={`mb-4 md:w-21.375`}>
+                            <select
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010] appearance-none"
                                 defaultValue={row.puritySpc}
                                 value={puritySpc}
                                 onChange={(e) => setPuritySpc(e.target.value)}
-                                placeholder="Purity spc"
-                            />
+                            >
+                                <option value="">Select Purity</option>
+                                <option value="24k">24k</option>
+                                <option value="23k">23k</option>
+                                <option value="22k">22k</option>
+                                <option value="18k">18k</option>
+                            </select>
                         </div>
-                        <div className="mb-4 ">
+
+                        <div className={`mb-4 md:w-21.375`}>
                             <input
                                 type="number"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.price}
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                placeholder="Price"
-                            // field named original price is there in the prop of this form but not used yet
+                                defaultValue={row.metalPrice}
+                                value={metalPrice}
+                                onChange={(e) => setMetalPrice(e.target.value)}
+                                placeholder="Metal price"
+                            />
+                        </div>
+                        <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.makingCharges}
+                                value={makingCharges}
+                                onChange={(e) => setMakingCharges(e.target.value)}
+                                placeholder="Making charges"
+                            />
+                        </div>
+                        <div className={`mb-4 md:w-21.375`}>
+                            <input
+                                type="number"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.otherCharges}
+                                value={otherCharges}
+                                onChange={(e) => setOtherCharges(e.target.value)}
+                                placeholder="Other charges"
                             />
                         </div>
                         <div className="mb-4 ">

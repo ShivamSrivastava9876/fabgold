@@ -6,7 +6,7 @@ import productTypeReducer from './slice/productType/productTypeSlice';
 // import orderReducer from './slice/order/orderSlice';
 import productReducer from './slice/product/productSlice';
 import reportReducer from './slice/report/reportSlice';
-// import manufacturingReducer from './slice/manufacturing/manufacturingSlice';
+import metalRateReducer from './slice/metalRate/metalRateSlice';
 // import workerReducer from './slice/worker/workerSlice';
 
 export const store = configureStore({
@@ -18,7 +18,7 @@ export const store = configureStore({
         // order: orderReducer,
         product: productReducer,
         report: reportReducer,
-        // manufacturing: manufacturingReducer,
+        metalRate: metalRateReducer,
         // worker: workerReducer
     }
 })

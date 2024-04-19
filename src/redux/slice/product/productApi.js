@@ -55,10 +55,13 @@ export async function createProduct(newProductInfo) {
         formData.append("sub_model", newProductInfo.sub_model);
         formData.append("gross_wt", newProductInfo.weight);
         formData.append("stone_wt", newProductInfo.stone_wt);
+        formData.append("metal_wt", newProductInfo.metal_weight);
+        formData.append("metal_price", newProductInfo.metal_price);
+        formData.append("making_charges", newProductInfo.making_charges);
+        formData.append("other_charges", newProductInfo.other_charges);
         formData.append("size", newProductInfo.size);
         formData.append("length", newProductInfo.length);
         formData.append("purity_spec", newProductInfo.purity_spec);
-        formData.append("price", newProductInfo.price);
         formData.append("quantity", newProductInfo.quantity);
         for (let i = 0; i < allImages.length; i++) {
             formData.append('images', allImages[i]);
@@ -104,6 +107,7 @@ export async function updateProduct(updateProductInfo) {
         for (let i = 0; i < images.length; i++) {
             allImages.push(images[i]);
         }
+        console.log("meme", updateProductInfo.metal_weight)
 
         //also get productId in updateProductInfo
         const formData = new FormData();
@@ -116,10 +120,13 @@ export async function updateProduct(updateProductInfo) {
         formData.append("sub_model", updateProductInfo.sub_model);
         formData.append("gross_wt", updateProductInfo.gross_wt);
         formData.append("stone_wt", updateProductInfo.stone_wt);
+        formData.append("metal_wt", updateProductInfo.metal_wt);
+        formData.append("metal_price", updateProductInfo.metal_price);
+        formData.append("making_charges", updateProductInfo.making_charges);
+        formData.append("other_charges", updateProductInfo.other_charges);
         formData.append("size", updateProductInfo.size);
         formData.append("length", updateProductInfo.length);
         formData.append("purity_spec", updateProductInfo.purity_spec);
-        formData.append("price", updateProductInfo.price);
         formData.append("quantity", updateProductInfo.quantity);
         for (let i = 0; i < allImages.length; i++) {
             formData.append('images', allImages[i]);

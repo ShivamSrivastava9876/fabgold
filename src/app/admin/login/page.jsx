@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import Logo from "../../../public/assets/LOGO.png";
-import AndroidLogo from "../../../public/assets/android_logo.png";
+import Logo from "../../../../public/assets/LOGO.png";
+// import AndroidLogo from "../../../public/assets/android_logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { apkDownloadAsync, loginUserAsync, selectApkLink, selectErrorMessage } from "../../redux/slice/login/loginSlice";
+import { apkDownloadAsync, loginUserAsync, selectApkLink, selectErrorMessage } from "@/redux/slice/login/loginSlice";
 // import { selectUser } from "../../redux/slice/login/loginSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ const Login = () => {
     ).then((result) => {
       // Check if createUserAsync was successful
       if (loginUserAsync.fulfilled.match(result)) {
-        router.push('/dashboard')
+        router.push('/admin/dashboard')
       }
     });
   };

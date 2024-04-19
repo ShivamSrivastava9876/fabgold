@@ -1,29 +1,28 @@
 "use client"
 
 import Layout from "@/components/layout";
-import ProductReportTable from "@/components/productReportTable";
-import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import ReportBarGraph from "@/components/orderReportGraph";
 
-const ProductReports = () => {
+const Report = () => {
   const router = useRouter(); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push('/login'); // Redirect to login page if token is not found
+      router.push('/admin/login'); // Redirect to login page if token is not found
     }
   }, [router]); 
 
   return (
     <Layout>
       <div className="p-8">
-        <ProductReportTable />
+        <ReportBarGraph />
       </div>
     </Layout>
   );
 };
 
-export default ProductReports;
+export default Report;
 

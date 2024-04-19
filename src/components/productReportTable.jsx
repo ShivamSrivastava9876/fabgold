@@ -169,7 +169,7 @@ export default function WorkerReportTable() {
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "orderCount" ? (
                                                             <div className="text-blue-500 font-semibold">
-                                                                <Link href={`/orderByProductReport/${row.id}`}>{value || "0"}</Link>
+                                                                <Link href={`/admin/orderByProductReport/${row.id}`}>{value || "0"}</Link>
                                                             </div>
                                                         ) : // Render other columns
                                                             column.format && typeof value === "number" ? (

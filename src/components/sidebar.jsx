@@ -61,7 +61,7 @@ const SideBar = () => {
 
         <div className="w-full flex flex-col justify-between mt-2">
           <Link
-            href="/"
+            href="/admin/dashboard"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -73,7 +73,7 @@ const SideBar = () => {
             </span>
           </Link>
           <Link
-            href="/users"
+            href="/admin/users"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -83,7 +83,7 @@ const SideBar = () => {
             <span className=" text-normal text-white font-medium">Users</span>
           </Link>
           <Link
-            href="/category"
+            href="/admin/category"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -95,7 +95,7 @@ const SideBar = () => {
             </span>
           </Link>
           <Link
-            href="/productType"
+            href="/admin/productType"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -106,7 +106,7 @@ const SideBar = () => {
             </span>
           </Link>
           <Link
-            href="/product"
+            href="/admin/product"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -162,7 +162,7 @@ const SideBar = () => {
             className={`relative transition-max-h duration-500 ease-in-out overflow-hidden ${reportVisible ? "" : "h-0"}`}
           >
             <Link
-              href="/orderReports"
+              href="/admin/orderReports"
               className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
               hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
               active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -174,7 +174,7 @@ const SideBar = () => {
               </span>
             </Link>
             <Link
-              href="/productReports"
+              href="/admin/productReports"
               className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
               hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
               active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -186,7 +186,7 @@ const SideBar = () => {
               </span>
             </Link>
             <Link
-              href="/userReports"
+              href="/admin/userReports"
               className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
               hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
               active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"

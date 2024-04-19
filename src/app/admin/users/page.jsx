@@ -1,6 +1,6 @@
 "use client"
 
-import Layout from "../../components/layout";
+import Layout from "@/components/layout";
 import UserButtons from "@/components/userButtons";
 import UserTables from "@/components/userTables";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ const Users = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push('/login'); // Redirect to login page if token is not found
+      router.push('/admin/login'); // Redirect to login page if token is not found
     }
   }, [router]); 
 
