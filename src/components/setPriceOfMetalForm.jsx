@@ -16,6 +16,10 @@ const SetPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen
 
     const lastGoldPrice = useSelector(getGoldData);
     const lastSilverPrice = useSelector(getSilverData);
+
+    let currentDate = new Date().toDateString();
+    currentDate = currentDate.replace(/^([A-Z][a-z]+)(\s)/, '$1, ');
+
     useEffect(() => {
         if (lastGoldPrice && lastGoldPrice.data) {
             setGoldPrice(lastGoldPrice.data.price_24_kt);
@@ -51,6 +55,8 @@ const SetPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen
         Promise.all([
             dispatch(createGoldRateAsync({ price_24_kt: goldPrice, price_23_kt: goldPriceAt23K, price_22_kt: goldPriceAt22K, price_18_kt: goldPriceAt18K })),
             dispatch(createSilverRateAsync({ price_per_kg: silverPrice }))]).then(() => {
+                dispatch(getGoldRateAsync());
+                dispatch(getSilverRateAsync());
                 setPriceOfMetal(!priceOfMetal);
                 setSuccess(true);
                 setTimeout(() => {
@@ -58,6 +64,11 @@ const SetPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen
                 }, 3000)
             })
     }
+
+    useEffect(() => {
+        dispatch(getGoldRateAsync());
+        dispatch(getSilverRateAsync());
+    }, [dispatch]);
 
     return (
         <>
@@ -75,8 +86,12 @@ const SetPriceOfMetalForm = ({ priceOfMetal, setPriceOfMetal, setSuccess, isOpen
                     >
                         <div className="mb-4 space-y-1">
                             <h2 className=" flex items-center m-4 text-2xl font-bold">
-                                Set price of metal
+                                Update metal rates
                             </h2>
+                            <div id="current date" className="flex space-x-2 m-4">
+                                <h4 className="font-semibold text-sm">Date:</h4>
+                                <div className="font-semibold text-sm text-gray-600">{currentDate}</div>
+                            </div>
                         </div>
 
                         <div id="sectionsOfGoldAndSilver" className="flex justify-center md:flex-nowrap flex-wrap">

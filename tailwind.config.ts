@@ -30,6 +30,7 @@ const config: Config = {
       fontFamily: {
         ...fontFamily,
         'poppins': ['Poppins'],
+        'lobster': ['Lobster']
       },
     },
   },

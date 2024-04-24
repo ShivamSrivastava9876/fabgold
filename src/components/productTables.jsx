@@ -145,7 +145,6 @@ export default function ProductTables() {
 
     dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, hu_id: updatedHuId, product_id: updatedProductId, model: updatedModel, sub_model: updatedSubModel, product_name: updatedProduct, metal_wt: updatedMetalWeight, stone_wt: updatedStoneWeight, gross_wt: updatedGrossWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, metal_price: updatedMetalPrice, making_charges: updatedMakingCharges, other_charges: updatedOtherCharges, quantity: updatedQuantity, description: updatedDescription, image: updatedImage, is_available: true })).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
-        console.log(updatedMetalWeight, "hehe2")
 
         dispatch(getProductAsync());
         setHuId("");
