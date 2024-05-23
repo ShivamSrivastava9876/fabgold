@@ -29,7 +29,7 @@ const SideBar = () => {
 
   const handleLogout = () => {
 
-    router.push('/login');
+    router.push('/admin/login');
     dispatch(logoutUserAsync());
   }
 

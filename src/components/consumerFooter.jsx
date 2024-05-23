@@ -23,7 +23,7 @@ const ConsumerFooter = () => {
                         />
                     </div>
                     <div id='appDownload' className='flex flex-col items-center'>
-                        <div className='text-xs text-white'>Download the app by clicking the link below:</div>
+                        <div className='text-xs text-white italic'>Download the app by clicking the link below:</div>
                         <div className='flex justify-center'>
                             <div id="googlePlay">
                                 <Image
@@ -47,27 +47,27 @@ const ConsumerFooter = () => {
                     </div>
                 </div>
                 <div id='usefulLinks' className='py-5 px-1 md:w-1/6 mx-2'>
-                    <p className='text-base text-white font-semibold mb-2'>Useful links</p>
-                    <p className='text-sm text-white font-extralight'>Delivery information</p>
-                    <p className='text-sm text-white font-extralight'>Returns</p>
-                    <p className='text-sm text-white font-extralight'>Blog</p>
-                    <p className='text-sm text-white font-extralight'>Payment options</p>
-                    <p className='text-sm text-white font-extralight'>Track your order</p>
+                    <p className='text-base text-white font-semibold mb-2 italic'>Useful links</p>
+                    <p className='text-sm text-white font-extralight italic'>Delivery information</p>
+                    <p className='text-sm text-white font-extralight italic'>Returns</p>
+                    <p className='text-sm text-white font-extralight italic'>Blog</p>
+                    <p className='text-sm text-white font-extralight italic'>Payment options</p>
+                    <p className='text-sm text-white font-extralight italic'>Track your order</p>
                 </div>
                 <div id='services' className='py-5 px-1 md:w-1/6 mx-2'>
-                    <p className='text-base text-white font-semibold mb-2'>Service</p>
-                    <p className='text-sm text-white font-extralight'>Offers</p>
-                    <p className='text-sm text-white font-extralight'>Help and FAQ</p>
-                    <p className='text-sm text-white font-extralight'>About FABGOLD</p>
+                    <p className='text-base text-white font-semibold mb-2 italic'>Service</p>
+                    <p className='text-sm text-white font-extralight italic'>Offers</p>
+                    <p className='text-sm text-white font-extralight italic'>Help and FAQ</p>
+                    <p className='text-sm text-white font-extralight italic'>About FABGOLD</p>
                 </div>
                 <div id='contact' className='py-5 px-1 md:w-1/6 mx-2'>
-                    <p className='text-base text-white font-semibold mb-2'>Contact</p>
-                    <p className='text-sm text-white font-extralight mb-2'>(091) 322-7128</p>
-                    <p className='text-sm text-white font-extralight mb-2'>Fabgold@gmail.com</p>
-                    <p className='text-sm text-white font-extralight'>Office no 738 & 740, Gera Imperium Rise, near Wipro circle, Hinjawadi Phase II, Hinjawadi Rajiv Gandhi Infotech Park, Hinjawadi, Pune, Pimpri-Chinchwad, Maharashtra 411057</p>
+                    <p className='text-base text-white font-semibold mb-2 italic'>Contact</p>
+                    <p className='text-sm text-white font-extralight mb-2 italic'>(091) 322-7128</p>
+                    <p className='text-sm text-white font-extralight mb-2 italic'>Fabgold@gmail.com</p>
+                    <p className='text-sm text-white font-extralight italic'>Office no 738 & 740, Gera Imperium Rise, near Wipro circle, Hinjawadi Phase II, Hinjawadi Rajiv Gandhi Infotech Park, Hinjawadi, Pune, Maharashtra 411057</p>
                 </div>
                 <div id='socialMedia' className='py-5 px-1 md:ml-4 md:w-1/6 mx-2'>
-                    <p className='text-base text-white font-semibold mb-2'>Social media</p>
+                    <p className='text-base text-white font-semibold mb-2 italic'>Social media</p>
                     <div className='flex'>
                         <Image
                             src={FbLogo}
