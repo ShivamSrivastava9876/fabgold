@@ -82,6 +82,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Hide arrows in input of type number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .lobster-regular {
   font-family: "Lobster", sans-serif;
   font-weight: 400;

@@ -1,74 +1,238 @@
+"use client";
+
 import SidebarLogo from "../../public/assets/LOGO.png";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import Image from "next/image";
 import ShoppingBag from "../../public/assets/heroicons--shopping-bag.png";
 import AccountIcon from "../../public/assets/account-icon.png";
-import NotificationIcon from "../../public/assets/mingcute--notification-line.png"
+import NotificationIcon from "../../public/assets/mingcute--notification-line.png";
+import LoginImage from "@/../../public/image-46.png";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import Popup from "@/components/otpPopup";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import Link from "next/link";
 
 export default function ConsumerHeader() {
-    return (
-        <>
-            <div id="mainHeader" className="w-full bg-[#BB1140] md:h-20 h-auto flex md:flex-row flex-col items-center border justify-between">
-                <div id="logo" className="text-xl font-bold text-white flex mr-auto">
-                    <Image
-                        src={SidebarLogo}
-                        width={80}
-                        height={80}
-                        alt="logo"
-                        objectFit="contain"
-                        objectPosition="center"
-                        className="mt-2"
-                    />
-                </div>
-                <div id="searchBar" className="w-full md:w-3/4 bg-[#BB1140]">
-                    <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 md:w-2/3 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
-                        <input
-                            type="search"
-                            placeholder=""
-                            className="w-full h-full text-white outline-none bg-transparent text-blue-gray-700 appearance-none"
-                        />
-                        <div className="ml-2">
-                            <Image
-                                src={SearchIcon}
-                                alt="search-icon"
-                                className="cursor-pointer"
-                            />
-                        </div>
-                    </form>
-                </div>
-                <div id="accountIcons" className="flex px-4 space-x-4 md:static absolute top-10 right-2">
-                    <div id="account">
-                        <Image
-                            src={AccountIcon}
-                            alt="account-icon"
-                            className="cursor-pointer w-6 h-6"
-                        />
-                    </div>
-                    <div id="notification">
-                        <Image
-                            src={NotificationIcon}
-                            alt="account-icon"
-                            className="cursor-pointer w-6 h-6"
-                        />
-                    </div>
-                    <div id="cart">
-                        <Image
-                            src={ShoppingBag}
-                            alt="account-icon"
-                            className="cursor-pointer w-6 h-6"
-                        />
-                    </div>
-                </div>
+  const [isChecked, setIsChecked] = useState(false);
+  const [otpPopUpStatus, setOtpPopUpStatus] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
+
+  const handleOtpPopUp = () => {
+    setIsChecked(false);
+    setOtpPopUpStatus(true);
+  };
+
+  const togglePopup = () => {
+    setOtpPopUpStatus(false);
+  };
+
+  return (
+    <>
+      <div
+        id="mainHeader"
+        className="w-full bg-[#BB1140] md:h-20 h-auto flex md:flex-row flex-col items-center border justify-between"
+      >
+        <Link href="/consumerHomepage" id="logo" className="text-xl font-bold text-white flex mr-auto">
+          <Image
+            src={SidebarLogo}
+            width={80}
+            height={80}
+            alt="logo"
+            objectFit="contain"
+            objectPosition="center"
+            className="mt-2"
+          />
+        </Link>
+        <div id="searchBar" className="w-full md:w-3/4 bg-[#BB1140]">
+          <form
+            onSubmit={(e) => handleCategorySearch(e)}
+            className="flex items-center m-2 md:w-2/3 border-2 border-solid border-gray-300 rounded-full px-4 py-2"
+          >
+            <input
+              type="search"
+              placeholder=""
+              className="w-full h-full text-white outline-none bg-transparent text-blue-gray-700 appearance-none"
+            />
+            <div className="ml-2">
+              <Image
+                src={SearchIcon}
+                alt="search-icon"
+                className="cursor-pointer"
+              />
             </div>
-            <div id="slider" className="h-10 flex justify-center items-center">
-                <div id="components" className="flex items-center space-x-12 px-5 h-full overflow-x-scroll no-scrollbar font-semibold text-gray-600 text-sm whitespace-nowrap">
-                    <div className=" active:border-b-4 hover:border-b-4 border-red-600 px-1 h-full flex items-center cursor-pointer">All</div>
-                    <div className="active:border-b-4 hover:border-b-4 border-red-600 px-1 h-full flex items-center cursor-pointer">Gold</div>
-                    <div className="active:border-b-4 hover:border-b-4 border-red-600 px-1 h-full flex items-center cursor-pointer">Silver</div>
-                    <div className="active:border-b-4 hover:border-b-4 border-red-600 px-1 h-full flex items-center cursor-pointer">Platinum</div>
-                    <div className="">More</div>
-                </div>
+          </form>
+        </div>
+        <div
+          id="accountIcons"
+          className="flex px-4 space-x-4 md:static absolute top-10 right-2"
+        >
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <div id="account">
+                <Image
+                  src={AccountIcon}
+                  alt="account-icon"
+                  className="cursor-pointer w-6 h-6"
+                />
+              </div>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="flex p-7 w-5/6 flex-col">
+              <AlertDialogHeader className="flex flex-col items-center">
+                <AlertDialogTitle className="text-3xl italic text-[#BB1140]">
+                  LOGIN
+                </AlertDialogTitle>
+                <AlertDialogDescription></AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <div className="grid w-full items-center gap-1.5 mt-5">
+                <Label
+                  htmlFor="email"
+                  className="font-semibold text-base italic"
+                >
+                  Enter contact number
+                </Label>
+                <Input
+                  type="number"
+                  id="number"
+                  placeholder=""
+                  className="italic"
+                />
+              </div>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  className="form-checkbox h-4 w-4 text-[#BB1140] border-gray-300 rounded focus:ring-[#BB1140]"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-semibold italic leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Accept terms and conditions
+                </label>
+              </div>
+              <label
+                htmlFor="terms"
+                className="text-sm font-semibold italic leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                By continuing, I agree to <u>terms and conditions</u> &{" "}
+                <u>privacy policy</u>
+              </label>
+
+              <AlertDialogFooter className="mt-4">
+                <AlertDialogCancel
+                  className="italic"
+                  onClick={() => setIsChecked(false)}
+                >
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  className={`bg-[#BB1140] italic ${
+                    !isChecked ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  disabled={!isChecked}
+                  onClick={handleOtpPopUp}
+                >
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <Popup show={otpPopUpStatus} handleClose={togglePopup}>
+            <div className="flex flex-col items-center space-y-7">
+              <h2 className="text-3xl italic text-[#BB1140]">LOGIN</h2>
+              <p className="italic text-sm">
+                Enter the OTP received on your contact number
+              </p>
+              <div>
+                <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+                  <InputOTPGroup>
+                    <InputOTPSlot className="border-[#BB1140]" index={0} />
+                    <InputOTPSlot className="border-[#BB1140]" index={1} />
+                    <InputOTPSlot className="border-[#BB1140]" index={2} />
+                    <InputOTPSlot className="border-[#BB1140]" index={3} />
+                    <InputOTPSlot className="border-[#BB1140]" index={4} />
+                    <InputOTPSlot className="border-[#BB1140]" index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </div>
+              <div>
+                <Button className="italic">Submit</Button>
+              </div>
             </div>
-        </>
-    );
+          </Popup>
+
+          <div id="notification">
+            <Image
+              src={NotificationIcon}
+              alt="account-icon"
+              className="cursor-pointer w-6 h-6"
+            />
+          </div>
+          <Link href="/consumerHomepage/cartPage" id="cart">
+            <Image
+              src={ShoppingBag}
+              alt="account-icon"
+              className="cursor-pointer w-6 h-6"
+            />
+          </Link>
+        </div>
+      </div>
+
+      <div id="slider" className="h-10 flex justify-center items-center">
+        <div
+          id="components"
+          className="flex items-center space-x-12 px-5 h-full overflow-x-scroll no-scrollbar font-semibold text-gray-600 text-sm whitespace-nowrap"
+        >
+          <Link href="/consumerHomepage/productsListingPage">
+            <div className=" active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
+              All jewellery
+            </div>
+          </Link>
+          <Link href="/consumerHomepage/productsListingPage">
+            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
+              Gold
+            </div>
+          </Link>
+          <Link href="/consumerHomepage/productsListingPage">
+            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
+              Silver
+            </div>
+          </Link>
+          <Link href="/consumerHomepage/productsListingPage">
+            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
+              Platinum
+            </div>
+          </Link>
+          <div className=" italic">More</div>
+        </div>
+      </div>
+    </>
+  );
 }

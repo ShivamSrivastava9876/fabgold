@@ -54,6 +54,24 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 const ConsumerHomepage = () => {
   const router = useRouter();
 
+  const newArrivals = [
+    {
+      photo: NewArrivalsOne,
+    },
+    {
+      photo: NewArrivalsTwo,
+    },
+    {
+      photo: NewArrivalsThree,
+    },
+    {
+      photo: NewArrivalsFour,
+    },
+    {
+      photo: NewArrivalsFive,
+    },
+  ];
+
   const categories = [
     {
       photo: CategoryOne,
@@ -144,81 +162,38 @@ const ConsumerHomepage = () => {
           <div className="md:text-xl text-sm text-[#BB1140] text-center font-bold">
             Know more about our new products
           </div>
-          <Swiper
-            spaceBetween={30}
-            slidesPerView={1}
-            navigation={{
-              prevEl: ".swiper-button-prev",
-              nextEl: ".swiper-button-next",
-              navigationOptions: {
-                color: "#BB1140",
-              },
-            }}
-            pagination={{
-              el: ".swiper-pagination",
-              clickable: true,
-              renderBullet: function (index, className) {
-                return (
-                  '<span class="' +
-                  className +
-                  ' bg-pink-500 w-3 h-3 rounded-full"></span>'
-                );
-              },
-            }}
-            className="mySwiper"
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 50,
-              },
-            }}
-          >
-            {/* <div className="swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-6 h-6"></div>
-            <div className="swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-6 h-6"></div> */}
-            <SwiperSlide>
-              <Image
-                src={NewArrivalsFive}
-                alt="Small Photo 4"
-                className="w-min h-40 md:w-full md:h-auto object-scale-down"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={NewArrivalsFour}
-                alt="Small Photo 4"
-                className="w-min h-40 md:w-full md:h-auto object-scale-down"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={NewArrivalsThree}
-                alt="Small Photo 4"
-                className="w-min h-40 md:w-full md:h-auto object-scale-down"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={NewArrivalsTwo}
-                alt="Small Photo 4"
-                className="w-min h-40 md:w-full md:h-auto object-scale-down"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                src={NewArrivalsOne}
-                alt="Small Photo 4"
-                className="w-min h-40 md:w-full md:h-auto object-scale-down"
-              />
-            </SwiperSlide>
-          </Swiper>
+          <div className="flex justify-center">
+            <Carousel className="w-full max-w-2xl md:max-w-3xl lg:max-w-7xl mt-3">
+              <CarouselContent className="">
+                {newArrivals.map((category, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-1/3 md:basis-1/2 lg:basis-2/5"
+                  >
+                    <div className="p-1 w-full">
+                      <Card className=" rounded-none ">
+                        <CardContent className="flex aspect-video items-center justify-center p-0">
+                          <span className="text-2xl font-semibold">
+                            <Image
+                              src={category.photo}
+                              width={350}
+                              height={350}
+                              alt="categoryPhoto"
+                              objectFit="contain"
+                              objectPosition="center"
+                              className=""
+                            />
+                          </span>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="lg:flex hidden" />
+              <CarouselNext className="lg:flex hidden" />
+            </Carousel>
+          </div>
         </div>
 
         <div
@@ -412,9 +387,9 @@ const ConsumerHomepage = () => {
           id="trendingProducts"
           className="mt-12 mb-12 md:mt-24 md:mb-16 flex flex-col justify-center items-center"
         >
-          <h1 className="text-center text-[#BB1140] font-lobster text-4xl md:text-6xl mb-12">
-            Our products
-          </h1>
+          <div className="text-center text-[#BB1140] font-lobster text-4xl md:text-6xl mb-12">
+            P r o d u c t s 
+          </div>
           <Carousel className="w-full max-w-sm md:max-w-4xl lg:max-w-5xl">
             <CarouselContent className="-ml-1">
               {products.map((product, index) => (
