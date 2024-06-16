@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
-const cartPage = () => {
+const CartPage = () => {
   const orders = [
     {
       productPhotoId: 101,
@@ -45,12 +45,13 @@ const cartPage = () => {
   return (
     <ConsumerLayout>
       <div className="w-full my-6 flex font-lobster justify-center text-5xl md:text-7xl text-[#c14d6e] ">
-        Shopping bag
+        B a g
       </div>
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3">
         <div className="col-span-2 ">
           {orders.map((order) => (
             <div
+            key={order.productId}
               id="order"
               className="flex md:flex-row justify-center items-center flex-col p-5 md:p-10 bg-white border border-[#c14d6e] m-8"
             >
@@ -71,11 +72,13 @@ const cartPage = () => {
                     {order.wishlist ? (
                       <Image
                         src={WishListAddedImage}
+                        alt={order.productName}
                         className="h-8 w-8 mr-2 cursor-pointer"
                       />
                     ) : (
                       <Image
                         src={WishListImage}
+                        alt="wish"
                         className="h-8 w-8 mr-2 cursor-pointer"
                       />
                     )}{" "}
@@ -96,6 +99,7 @@ const cartPage = () => {
           className="my-8 lg:mr-8 flex flex-col items-center h-min px-4 bg-white"
         >
           <div
+          
             id="promocode"
             className="flex w-full max-w-sm my-4 items-center space-x-2"
           >
@@ -123,4 +127,4 @@ const cartPage = () => {
   );
 };
 
-export default cartPage;
+export default CartPage;

@@ -5,6 +5,7 @@ import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import Image from "next/image";
 import ShoppingBag from "../../public/assets/heroicons--shopping-bag.png";
 import AccountIcon from "../../public/assets/account-icon.png";
+import LoginIcon from "@/../../public/clarity--login-line.png";
 import NotificationIcon from "../../public/assets/mingcute--notification-line.png";
 import LoginImage from "@/../../public/image-46.png";
 import {
@@ -55,7 +56,11 @@ export default function ConsumerHeader() {
         id="mainHeader"
         className="w-full bg-[#BB1140] md:h-20 h-auto flex md:flex-row flex-col items-center border justify-between"
       >
-        <Link href="/consumerHomepage" id="logo" className="text-xl font-bold text-white flex mr-auto">
+        <Link
+          href="/consumerHomepage"
+          id="logo"
+          className="text-xl font-bold text-white flex mr-auto"
+        >
           <Image
             src={SidebarLogo}
             width={80}
@@ -89,11 +94,60 @@ export default function ConsumerHeader() {
           id="accountIcons"
           className="flex px-4 space-x-4 md:static absolute top-10 right-2"
         >
+          <Popup show={otpPopUpStatus} handleClose={togglePopup}>
+            <div className="flex flex-col items-center space-y-7">
+              <h2 className="text-3xl italic text-[#BB1140]">LOGIN</h2>
+              <p className="italic text-sm">
+                Enter the OTP received on your contact number
+              </p>
+              <div>
+                <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+                  <InputOTPGroup>
+                    <InputOTPSlot className="border-[#BB1140]" index={0} />
+                    <InputOTPSlot className="border-[#BB1140]" index={1} />
+                    <InputOTPSlot className="border-[#BB1140]" index={2} />
+                    <InputOTPSlot className="border-[#BB1140]" index={3} />
+                    <InputOTPSlot className="border-[#BB1140]" index={4} />
+                    <InputOTPSlot className="border-[#BB1140]" index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </div>
+              <div>
+                <Button className="italic">Submit</Button>
+              </div>
+            </div>
+          </Popup>
+
+          <Link href="/consumerHomepage/accountDetails" className="" id="account">
+            <Image
+              src={AccountIcon}
+              alt="account-icon"
+              className="cursor-pointer w-6 h-6"
+            />
+          </Link>
+
+
+          {/* <div id="notification">
+            <Image
+              src={NotificationIcon}
+              alt="account-icon"
+              className="cursor-pointer w-7 h-7"
+            />
+          </div> */}
+
+          <Link href="/consumerHomepage/cartPage" id="cart">
+            <Image
+              src={ShoppingBag}
+              alt="account-icon"
+              className="cursor-pointer w-6 h-6"
+            />
+          </Link>
+
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <div id="account">
+              <div id="login">
                 <Image
-                  src={AccountIcon}
+                  src={LoginIcon}
                   alt="account-icon"
                   className="cursor-pointer w-6 h-6"
                 />
@@ -163,45 +217,6 @@ export default function ConsumerHeader() {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-
-          <Popup show={otpPopUpStatus} handleClose={togglePopup}>
-            <div className="flex flex-col items-center space-y-7">
-              <h2 className="text-3xl italic text-[#BB1140]">LOGIN</h2>
-              <p className="italic text-sm">
-                Enter the OTP received on your contact number
-              </p>
-              <div>
-                <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
-                  <InputOTPGroup>
-                    <InputOTPSlot className="border-[#BB1140]" index={0} />
-                    <InputOTPSlot className="border-[#BB1140]" index={1} />
-                    <InputOTPSlot className="border-[#BB1140]" index={2} />
-                    <InputOTPSlot className="border-[#BB1140]" index={3} />
-                    <InputOTPSlot className="border-[#BB1140]" index={4} />
-                    <InputOTPSlot className="border-[#BB1140]" index={5} />
-                  </InputOTPGroup>
-                </InputOTP>
-              </div>
-              <div>
-                <Button className="italic">Submit</Button>
-              </div>
-            </div>
-          </Popup>
-
-          <div id="notification">
-            <Image
-              src={NotificationIcon}
-              alt="account-icon"
-              className="cursor-pointer w-6 h-6"
-            />
-          </div>
-          <Link href="/consumerHomepage/cartPage" id="cart">
-            <Image
-              src={ShoppingBag}
-              alt="account-icon"
-              className="cursor-pointer w-6 h-6"
-            />
-          </Link>
         </div>
       </div>
 

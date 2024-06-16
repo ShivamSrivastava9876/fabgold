@@ -29,7 +29,7 @@ import React, { useState } from "react";
 import ConsumerLayout from "../../../components/consumerLayout";
 import Link from "next/link";
 
-const productListingPage = () => {
+const ProductListingPage = () => {
   let side = "left";
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
@@ -39,36 +39,42 @@ const productListingPage = () => {
     {
       productImage: ProductImageOne,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageTwo,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: true,
     },
     {
       productImage: ProductImageThree,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageFour,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageFive,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageSix,
       productPrice: "₹50,000",
+      productId: 101,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
@@ -100,7 +106,7 @@ const productListingPage = () => {
     <ConsumerLayout>
       <div className=" w-full h-10 hidden lg:flex bg-[#e66e90] justify-around items-center">
         <div className="mx-8 px-5 flex bg-[#c73760] text-xl font-bold">
-          <Image src={FilterImage} className="h-6 w-6 mr-2" />
+          <Image src={FilterImage} alt="filter" className="h-6 w-6 mr-2" />
           Filters
         </div>
         <div className="mx-8 px-10 relative">
@@ -160,7 +166,7 @@ const productListingPage = () => {
         <Sheet key={side} className="">
           <SheetTrigger asChild>
             <Button variant="outline" className="m-2 h-10 font-bold lg:hidden">
-              <Image src={FilterImage} className="h-6 w-6 mr-2" />
+              <Image src={FilterImage} alt="filter" className="h-6 w-6 mr-2" />
               Filters
             </Button>
           </SheetTrigger>
@@ -295,6 +301,7 @@ const productListingPage = () => {
       >
         {productList.map((product) => (
           <Link
+            key={product.productId}
             href="/consumerHomepage/productDescriptionPage"
             id=""
             className="border border-[#c14d6e] flex flex-col justify-center items-center m-5 p-3"
@@ -307,11 +314,13 @@ const productListingPage = () => {
               {product.wishlist ? (
                 <Image
                   src={WishListAddedImage}
+                  alt={product.productName}
                   className="absolute top-1 right-1 h-8 w-8"
                 />
               ) : (
                 <Image
                   src={WishListImage}
+                  alt="wishlist"
                   className="absolute top-1 right-1 h-8 w-8"
                 />
               )}
@@ -327,4 +336,4 @@ const productListingPage = () => {
   );
 };
 
-export default productListingPage;
+export default ProductListingPage;

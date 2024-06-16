@@ -14,6 +14,7 @@ import grayTick from "@/../../public/charm--circle-tick--gray.png";
 const checkoutAccountDetails = () => {
   const addresses = [
     {
+      id: 101,
       name: "Shivam Srivastava",
       addressLine: "Flat: 212/F, Ambegaon Bk",
       city: "Pune",
@@ -22,6 +23,7 @@ const checkoutAccountDetails = () => {
       contactNo: 1231231231,
     },
     {
+      id: 102,
       name: "Shivam Srivastava",
       addressLine: "Flat: 212/F, Ambegaon Bk",
       city: "Pune",
@@ -30,6 +32,7 @@ const checkoutAccountDetails = () => {
       contactNo: 1231231231,
     },
     {
+      id: 103,
       name: "Shivam Srivastava",
       addressLine: "Flat: 212/F, Ambegaon Bk",
       city: "Pune",
@@ -38,6 +41,7 @@ const checkoutAccountDetails = () => {
       contactNo: 1231231231,
     },
     {
+      id: 105,
       name: "Shivam Srivastava",
       addressLine: "Flat: 212/F, Ambegaon Bk",
       city: "Pune",
@@ -162,7 +166,7 @@ const checkoutAccountDetails = () => {
 
           <div id="addressSelection" className="space-y-5 mt-4">
             {addresses.map((address) => (
-              <div id="specificAddress" className="flex space-x-6 border p-4">
+              <div id="specificAddress" key={address.id} className="flex space-x-6 border p-4">
                 <input type="radio" />
                 <div id="addressDetails">
                   <div className="italic text-xs">{address.name} </div>

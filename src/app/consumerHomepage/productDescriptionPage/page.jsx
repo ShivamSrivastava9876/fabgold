@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
-const productDescriptionPage = () => {
+const ProductDescriptionPage = () => {
   const [selectedProductPhoto, setSelectedProductPhoto] = useState(null);
   const [purityDropdown, setPurityDropdown] = useState(false);
   const [selectedPuritySpc, setSelectedPuritySpc] = useState("");
@@ -101,6 +101,7 @@ const productDescriptionPage = () => {
                       <span className="text-4xl font-semibold">
                         <Image
                           src={selectedProductPhoto || productPhotos[0].photo}
+                          alt="selected product"
                           className=""
                         />
                       </span>
@@ -125,7 +126,7 @@ const productDescriptionPage = () => {
                     >
                       <CardContent className="flex aspect-square items-center justify-center p-6">
                         <span className="text-2xl font-semibold">
-                          <Image src={productPhoto.photo} className="" />
+                          <Image src={productPhoto.photo} alt={productPhoto.productPhotoId} className="" />
                         </span>
                       </CardContent>
                     </Card>
@@ -153,9 +154,9 @@ const productDescriptionPage = () => {
             </div>
             <div id="wishlistAndShare" className="w-1/12 flex justify-center">
               {false ? (
-                <Image src={WishListAddedImage} className="h-8 w-8" />
+                <Image alt="wishlist" src={WishListAddedImage} className="h-8 w-8" />
               ) : (
-                <Image src={WishListImage} className="h-8 w-8" />
+                <Image alt="wishlist" src={WishListImage} className="h-8 w-8" />
               )}
             </div>
           </div>
@@ -261,4 +262,4 @@ const productDescriptionPage = () => {
   );
 };
 
-export default productDescriptionPage;
+export default ProductDescriptionPage;
