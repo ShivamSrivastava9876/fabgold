@@ -15,11 +15,14 @@ const AccountDetails = () => {
   };
   return (
     <ConsumerLayout>
-      <div className="flex">
+      <div className="flex relative">
+      {isSidebarOpen && (
+          <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
+        )}
         <div
           className={`absolute md:static my-2 bg-gray-100 min-w-max w-full md:w-1/4 border-2 transition-transform transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0`}
+          } md:translate-x-0 z-50`}
         >
           <AccountDetailsSidebar />
           <button
