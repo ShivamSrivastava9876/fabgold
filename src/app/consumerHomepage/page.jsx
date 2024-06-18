@@ -18,7 +18,7 @@ import CategoryOne from "@/../../public/assets/categories1.jpg";
 import CategoryTwo from "@/../../public/assets/categories2.jpg";
 import CategoryThree from "@/../../public/assets/categories3.jpg";
 import CategoryFour from "@/../../public/assets/categories4.jpg";
-import CategoryFive from "@/../../public/assets/categories5.jpg";
+import CategoryFive from "@/../../public/assets/categories1.jpg";
 import ShopCollectionImage from "@/../../public/assets/image34.png";
 import AeroplaneIcon from "@/../../public/material-symbols-light--flight.png";
 import ClockIcon from "@/../../public/clarity--clock-line.png";
