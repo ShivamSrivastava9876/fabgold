@@ -22,7 +22,7 @@ const AccountDetails = () => {
         <div
           className={`absolute md:static my-2 bg-gray-100 min-w-max w-full md:w-1/4 border-2 transition-transform transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0 z-50`}
+          } md:translate-x-0 z-20`}
         >
           <AccountDetailsSidebar />
           <button

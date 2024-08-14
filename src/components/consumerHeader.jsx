@@ -32,10 +32,17 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import Link from "next/link";
+import DrawerOnHeader from "@/components/drawerOnHeader";
 
 export default function ConsumerHeader() {
   const [isChecked, setIsChecked] = useState(false);
   const [otpPopUpStatus, setOtpPopUpStatus] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedMetal, setSelectedMetal] = useState("");
+
+  const handleMouseEnter = (metal) => {
+    setSelectedMetal(metal);
+  };
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -118,14 +125,17 @@ export default function ConsumerHeader() {
             </div>
           </Popup>
 
-          <Link href="/consumerHomepage/accountDetails" className="" id="account">
+          <Link
+            href="/consumerHomepage/accountDetails"
+            className=""
+            id="account"
+          >
             <Image
               src={AccountIcon}
               alt="account-icon"
               className="cursor-pointer w-6 h-6"
             />
           </Link>
-
 
           {/* <div id="notification">
             <Image
@@ -220,33 +230,67 @@ export default function ConsumerHeader() {
         </div>
       </div>
 
-      <div id="slider" className="h-10 flex justify-center items-center">
+      <div
+        id="slider"
+        onMouseLeave={() => handleMouseEnter("")}
+        className="h-10 flex relative justify-center items-center"
+      >
         <div
           id="components"
           className="flex items-center space-x-12 px-5 h-full overflow-x-scroll no-scrollbar font-semibold text-gray-600 text-sm whitespace-nowrap"
         >
           <Link href="/consumerHomepage/productsListingPage">
-            <div className=" active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
-              All jewellery
+            <div className="relative active:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
+              <span className="hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:transform after:scale-x-0 after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-[#BB1140]">
+                All jewellery
+              </span>
             </div>
           </Link>
+
           <Link href="/consumerHomepage/productsListingPage">
-            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
-              Gold
+            <div
+              onMouseEnter={() => handleMouseEnter("Gold")}
+              className="relative active:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer"
+            >
+              {" "}
+              <span className="hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:transform after:scale-x-0 after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-[#BB1140]">
+                Gold
+              </span>
             </div>
           </Link>
+
           <Link href="/consumerHomepage/productsListingPage">
-            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
-              Silver
+            <div
+              onMouseEnter={() => handleMouseEnter("Silver")}
+              className="relative active:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer"
+            >
+              {" "}
+              <span className="hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:transform after:scale-x-0 after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-[#BB1140]">
+                Silver
+              </span>
             </div>
           </Link>
+
           <Link href="/consumerHomepage/productsListingPage">
-            <div className="active:border-b-4 hover:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer">
-              Platinum
+            <div
+              onMouseEnter={() => handleMouseEnter("Platinum")}
+              className="relative active:border-b-4 italic border-[#BB1140] px-1 h-full flex items-center cursor-pointer"
+            >
+              {" "}
+              <span className="hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:transform after:scale-x-0 after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-[#BB1140]">
+                Platinum
+              </span>
             </div>
           </Link>
           <div className=" italic">More</div>
         </div>
+
+        {selectedMetal && (
+          <DrawerOnHeader
+            selectedMetal={selectedMetal}
+            setSelectedMetal={setSelectedMetal}
+          />
+        )}
       </div>
     </>
   );
