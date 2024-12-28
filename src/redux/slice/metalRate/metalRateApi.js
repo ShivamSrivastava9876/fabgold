@@ -10,7 +10,7 @@ export async function getGoldRate() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/get-gold-rate/',
+            'http://127.0.0.1:8000/admin_panel/get-gold-rate/',
             {
                 method: "GET",
                 headers: header
@@ -41,7 +41,7 @@ export async function createGoldRate(goldRateInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/add-daily-goldrate/',
+            'http://127.0.0.1:8000/admin_panel/add-daily-goldrate/',
             {
                 method: "POST",
                 headers: header,
@@ -75,7 +75,7 @@ export async function getSilverRate() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/get-silver-rate/',
+            'http://127.0.0.1:8000/admin_panel/get-silver-rate/',
             {
                 method: "GET",
                 headers: header
@@ -107,7 +107,7 @@ export async function createSilverRate(silverRateInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/add-daily-silverrate/',
+            'http://127.0.0.1:8000/admin_panel/add-daily-silverrate/',
             {
                 method: "POST",
                 headers: header,

@@ -25,16 +25,27 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConsumerLayout from "../../../components/consumerLayout";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { getConsumerProductList, getCustomerProductListAsync } from "@/redux/slice/customerProductList/customerProductListSlice";
 
 const ProductListingPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCustomerProductListAsync());
+  }, [dispatch]);
+
   let side = "left";
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
   const [selectedSortMethod, setSelectedSortMethod] = useState("");
+  const consumerProductList = useSelector(getConsumerProductList);
+  console.log(consumerProductList, "Yes")
+
   const productList = [
     {
       productImage: ProductImageOne,
@@ -46,35 +57,35 @@ const ProductListingPage = () => {
     {
       productImage: ProductImageTwo,
       productPrice: "₹50,000",
-      productId: 101,
+      productId: 102,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: true,
     },
     {
       productImage: ProductImageThree,
       productPrice: "₹50,000",
-      productId: 101,
+      productId: 103,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageFour,
       productPrice: "₹50,000",
-      productId: 101,
+      productId: 104,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageFive,
       productPrice: "₹50,000",
-      productId: 101,
+      productId: 105,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
     {
       productImage: ProductImageSix,
       productPrice: "₹50,000",
-      productId: 101,
+      productId: 106,
       productName: "Peacock charm Gold Stud Earring",
       wishlist: false,
     },
@@ -302,7 +313,7 @@ const ProductListingPage = () => {
         {productList.map((product) => (
           <Link
             key={product.productId}
-            href="/consumerHomepage/productDescriptionPage"
+            href={`/consumer/Product-Description/${product.productId}`}
             id=""
             className="border border-[#c14d6e] flex flex-col justify-center items-center m-5 p-3"
           >

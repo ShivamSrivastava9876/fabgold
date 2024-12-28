@@ -116,7 +116,7 @@ const CartPage = () => {
             <div className="text-sm italic mb-2">You save: ₹ 72,323</div>
             <div className="text-sm italic mb-2">Total: ₹ 3,51,000</div>
           </div>
-          <Link href="/consumerHomepage/checkoutAccountDetails">
+          <Link href="/consumer/checkoutAccountDetails">
             <Button className="text-sm italic rounded-sm w-full mb-6">
               Place order
             </Button>

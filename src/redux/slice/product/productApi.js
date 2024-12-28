@@ -9,7 +9,7 @@ export async function getProduct() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/product-item-list/',
+            'http://127.0.0.1:8000/admin_panel/product-item-list/',
             {
                 method: 'GET',
                 headers: header
@@ -69,7 +69,7 @@ export async function createProduct(newProductInfo) {
         formData.append("description", newProductInfo.description);
         formData.append("is_available", newProductInfo.is_available);
         const response = await fetch(
-            'http://77.37.44.105:9000/admin_panel/add/product-item/',
+            'http://127.0.0.1:8000/admin_panel/add/product-item/',
             {
                 method: 'POST',
                 headers: header,
@@ -135,7 +135,7 @@ export async function updateProduct(updateProductInfo) {
         formData.append("is_available", updateProductInfo.is_available);
 
         const response = await fetch(
-            `http://77.37.44.105:9000/admin_panel/update/${updateProductInfo.productId}/product-item/`,
+            `http://127.0.0.1:8000/admin_panel/update/${updateProductInfo.productId}/product-item/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -168,7 +168,7 @@ export async function deleteProduct(productId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:9000/admin_panel/delete/${productId}/product-item/`,
+            `http://127.0.0.1:8000/admin_panel/delete/${productId}/product-item/`,
             {
                 method: 'DELETE',
                 headers: header
@@ -200,7 +200,7 @@ export async function searchProduct(searchProductInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:9000/admin_panel/product-item-list/?search=${searchProductInfo}`,
+            `http://127.0.0.1:8000/admin_panel/product-item-list/?search=${searchProductInfo}`,
             {
                 method: 'GET',
                 headers: header

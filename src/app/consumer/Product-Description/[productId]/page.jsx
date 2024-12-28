@@ -1,7 +1,7 @@
 "use client";
 
-import ConsumerLayout from "../../../components/consumerLayout";
-import React, { useState } from "react";
+import ConsumerLayout from "../../../../components/consumerLayout";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
@@ -22,8 +22,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { getCustomerProductDetailsAsync } from "@/redux/slice/customerProductList/customerProductListSlice";
 
 const ProductDescriptionPage = () => {
+  const params = useParams();
+  const productId = params.productId;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCustomerProductDetailsAsync(productId));
+  }, [dispatch]);
+
   const [selectedProductPhoto, setSelectedProductPhoto] = useState(null);
   const [purityDropdown, setPurityDropdown] = useState(false);
   const [selectedPuritySpc, setSelectedPuritySpc] = useState("");
@@ -126,7 +137,11 @@ const ProductDescriptionPage = () => {
                     >
                       <CardContent className="flex aspect-square items-center justify-center p-6">
                         <span className="text-2xl font-semibold">
-                          <Image src={productPhoto.photo} alt={productPhoto.productPhotoId} className="" />
+                          <Image
+                            src={productPhoto.photo}
+                            alt={productPhoto.productPhotoId}
+                            className=""
+                          />
                         </span>
                       </CardContent>
                     </Card>
@@ -154,7 +169,11 @@ const ProductDescriptionPage = () => {
             </div>
             <div id="wishlistAndShare" className="w-1/12 flex justify-center">
               {false ? (
-                <Image alt="wishlist" src={WishListAddedImage} className="h-8 w-8" />
+                <Image
+                  alt="wishlist"
+                  src={WishListAddedImage}
+                  className="h-8 w-8"
+                />
               ) : (
                 <Image alt="wishlist" src={WishListImage} className="h-8 w-8" />
               )}

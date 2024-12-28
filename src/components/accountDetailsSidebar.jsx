@@ -3,12 +3,28 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import AccountIcon from "../../public/assets/account-icon.png";
+import AccountIcon from "../../public/codicon--account.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getCustomerInfo, logoutCustomerAsync } from "@/redux/slice/customerProfile/customerProfileSlice";
+import { useRouter } from "next/navigation";
 
 const accountDetailsSidebar = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const customerInformation = useSelector(getCustomerInfo);
+
+  const handleLogout = () => {
+    dispatch(logoutCustomerAsync()).then((result) => {
+      if (logoutCustomerAsync.fulfilled.match(result)) {
+        router.push("/consumer/productsListingPage");
+      }
+    })
+  }
+
   return (
     <div className="">
-      <div id="title" className="bg-red-400 rounded-sm py-5 px-3 m-3 flex">
+      <div id="title" className="border bg-red-200 border-red-500 rounded-sm py-5 px-3 m-3 flex">
         <div id="profileLogo">
           <Image
             src={AccountIcon}
@@ -20,19 +36,24 @@ const accountDetailsSidebar = () => {
           id="profileNameAndEmail"
           className="ml-3 max-w-64 flex items-center"
         >
-          <h4 className="text-white italic">Hi, Kasim Baig</h4>
+          <h4 className=" italic">{`Hi ${customerInformation?.first_name || ""}`}</h4>
         </div>
       </div>
 
       <div id="accountContents">
-        <Link href="/consumerHomepage/accountDetails">
-          <div className=" text-sm m-5 p-2 italic bg-white hover:bg-red-200">
+        <Link href="/consumer/accountDetails">
+          <div className=" text-sm m-3 p-2 italic hover:underline hover:bg-red-200">
             P r o f i l e
           </div>
         </Link>
-        <Link href="/consumerHomepage/accountDetails/accountOrderDetails">
-          <div className="text-sm  m-5 p-2 italic bg-white hover:bg-red-200">
+        <Link href="/consumer/accountDetails/accountOrderDetails">
+          <div className="text-sm m-3 p-2 italic hover:underline hover:bg-red-200">
             O r d e r s
+          </div>{" "}
+        </Link>
+        <Link href="">
+          <div onClick={handleLogout} className="text-sm m-3 p-2 italic hover:underline hover:bg-red-200">
+            L o g o u t
           </div>{" "}
         </Link>
       </div>

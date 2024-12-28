@@ -95,6 +95,8 @@ const DrawerOnHeader = ({ selectedMetal, setSelectedMetal }) => {
   const [types, setTypes] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(null); // State to track active category
+
   useEffect(() => {
     const selectedCategory = dataOfAllCategories.find(
       (metal) => metal.nameOfMetal === selectedMetal
@@ -104,17 +106,34 @@ const DrawerOnHeader = ({ selectedMetal, setSelectedMetal }) => {
     }
   }, [selectedMetal]);
 
-  const handleMouseOver = (category) => {
+  useEffect(() => {
+    const selectedCategory = dataOfAllCategories.find(
+      (metal) => metal.nameOfMetal === selectedMetal
+    );
+    if (selectedCategory) {
+      setCategories(selectedCategory.listOfCategories);
+      if (selectedCategory.listOfCategories.length > 0) {
+        // Set initial subcategories and types based on the first category
+        const firstCategory = selectedCategory.listOfCategories[0];
+        setSubCategories(firstCategory.listOfSubCategories);
+        setTypes(firstCategory.listOfTypes);
+        setActiveCategoryIndex(0);
+      }
+    }
+  }, [selectedMetal]);
+
+  const handleMouseOver = (category, index) => {
     setSubCategories(category.listOfSubCategories);
     setTypes(category.listOfTypes);
+    setActiveCategoryIndex(index); 
   };
 
   return (
     <div
       id="drawer"
-    //   onMouseEnter={() => setIsVisible(true)}
+      //   onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setSelectedMetal("")}
-      className="absolute flex justify-center w-full left-0 top-10 z-30"
+      className="absolute flex justify-center w-full left-0 top-10 z-40"
     >
       <div
         id="drawerContentContainer"
@@ -124,8 +143,8 @@ const DrawerOnHeader = ({ selectedMetal, setSelectedMetal }) => {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="border py-2 px-2 bg-yellow-100 hover:bg-white"
-              onMouseOver={() => handleMouseOver(category)}
+              className={`border py-2 px-2 ${index === activeCategoryIndex ? 'bg-white' : 'bg-yellow-100'} hover:bg-white`}
+              onMouseOver={() => handleMouseOver(category, index)}
             >
               {category.categoryName}
             </div>
@@ -133,7 +152,9 @@ const DrawerOnHeader = ({ selectedMetal, setSelectedMetal }) => {
         </div>
         <div id="dynamicListOfSubCategories" className="flex w-full">
           <div id="shopBySubCategories" className="w-2/3 py-4 px-4">
-            <h3 className="mb-4 underline underline-offset-2">Shop by sub categories</h3>
+            <h3 className="mb-4 underline underline-offset-2">
+              Shop by sub categories
+            </h3>
             <div id="listOfSubCategories">
               {subCategories.map((subCategory, index) => (
                 <div key={index} className="my-2">
